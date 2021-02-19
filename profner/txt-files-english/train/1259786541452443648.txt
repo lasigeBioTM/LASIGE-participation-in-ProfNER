@@ -1,0 +1,5 @@
+Coronavirus data in Spain as of Monday, May 11:
+
+227,436 confirmed PCR cases (3,046 more than yesterday, although 2,721 come from Catalonia and are not from the last 24h) (+373 +0.16% new cases)
+26,744 deaths (+123 +0.46%)
+137,139 registrations (+973 +0.71%)

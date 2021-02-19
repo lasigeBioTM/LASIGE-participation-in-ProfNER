@@ -1,0 +1,2 @@
+all: hope the pandemic ends soon
+the pandemic: https://t.co/dHGnptZzuL

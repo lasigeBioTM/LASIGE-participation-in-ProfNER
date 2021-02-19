@@ -1,0 +1,16 @@
+HOSPITALS SITUATION #Burgos
+FACTS #COVID19 17 May
+
+CONFIRMED CASES
+      TOTAL: 2,746 (+12)
+      PCR+: 1958 (+13)
+
+HOSPITALIZED ON THE WARD
+      #HUBU 32 (+2)
+      #MirandaDeEbro 3 (=)
+      #ArandaDeDuero 3 (=)
+
+IN ICU 11 (-1)
+
+7th DAY IN A SEQUELY WITHOUT DEATHS
+TOTAL: 205 (=) https://t.co/8tqQpVPSOB

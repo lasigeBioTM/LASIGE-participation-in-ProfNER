@@ -1,0 +1,1 @@
+If no reading is taken it must be reading = 0 at this time applying estimated readings does not apply.

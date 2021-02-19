@@ -1,0 +1,11 @@
+Covid-19 Colombia, INS update. Comparison previous day.
+- Total Diagnostics: 1267
+Case Management:
+- House: 1030 (+ 75)
+- Hospital: 103 (+ 21)
+- Retrieved: 55 (+ 0)
+- ICU Hospital: 54 (+ 4)
+- Deceased: 25 (+ 6)
+#StayAtYourHome
+#Covid19
+#Covid19Colombia

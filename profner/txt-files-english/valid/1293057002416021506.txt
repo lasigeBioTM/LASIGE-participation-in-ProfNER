@@ -1,0 +1,1 @@
+Ok, I have been looking at the COVID Radar issue, specifically why it uses GPS if they are not supposed to track our location. TL:DR is justified and I think we should all use the app. Let me explain. Inside THREAD

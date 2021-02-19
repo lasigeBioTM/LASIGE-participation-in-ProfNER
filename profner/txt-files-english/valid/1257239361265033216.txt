@@ -1,0 +1,1 @@
+One example: using Summit, the world's most powerful supercomputer, developed by IBM, a team of researchers has been able to simulate how 8,000 pharmaceutical compounds could inhibit the ability of COVID19 to infect "host" cells.

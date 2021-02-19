@@ -1,0 +1,9 @@
+Infected by Covid-19 per million population: 
+-Brazil: 2224 
+-Spain: 5085 (+128%) 
+
+Covid-19 deaths per million population: 
+-Brazil: 133 
+-Spain: 574 (+331%) 
+
+Do you need anything else?

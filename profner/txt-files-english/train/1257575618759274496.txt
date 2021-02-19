@@ -1,0 +1,5 @@
+About the Alarm Status:
+1) It is false that it guarantees the ERTE. A decree law can guarantee the ERTE
+2) It is false that confinement is guaranteed. It is possible to confine populations as happened in La Rioja before the alarm state.
+
+3) What it does guarantee is Sanchez's single command.
