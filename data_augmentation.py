@@ -72,37 +72,3 @@ def augment_data(docs, subset):
             
         
 augment_data(load_dataset_BIO("train"), "train")
-
-#print(synonym_word.augment("perro"))
-
-
-"""
-text = 'Cerramos nuestra querida Radio 😢 Nuestros colaboradores y conductores ¡ Se quedan en casa !'
-
-#Substitute random character
-aug = nac.RandomCharAug(action="substitute")
-augmented_text = aug.augment(text)
-print("Original:")
-print(text)
-print("Augmented Text:")
-print(augmented_text)
-
-#Swap character random
-
-swap_char = nac.RandomCharAug(action="swap")
-augmented_text = aug.augment(text)
-print("Original:")
-print(text)
-print("Augmented Text:")
-print(augmented_text)
-
-#Substitute character by keyboard distance
-aug = nac.KeyboardAug()
-augmented_text = aug.augment(text)
-print("Original:")
-print(text)
-print("Augmented Text:")
-print(augmented_text)
-"""
-
-
