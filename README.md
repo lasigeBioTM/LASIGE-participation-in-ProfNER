@@ -9,6 +9,16 @@ original train file (train_spacy.txt) + train files with augmented data (train_k
 
 ## 2. MER
 
+[Python implementation of MER](https://pypi.org/project/merpy/)
+
+Mentions belonging to "PROFESION" category:
+- profner-gazetteer.tsv 
+- synonyms of profner-gazetteer.tsv 
+- trainning set (4 versions)
+
+Mentions belonging to "SITUACION_LABORAL" category
+- trainning set (4 versions)
+
 ## 3. FLAIR tagger
 
 ### Embeddings
