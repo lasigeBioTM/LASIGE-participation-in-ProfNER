@@ -5,8 +5,10 @@ from flair.models import SequenceTagger
 from flair.embeddings import FlairEmbeddings
 from flair.data import Sentence
 import spacy
+import sys
 from spacy.lang.es import Spanish
 from spacy.pipeline import SentenceSegmenter
+sys.path.append("./")
 
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
@@ -29,6 +31,7 @@ def build_annotation_file(doc, doc_filepath, model):
     #print(doc_spacy)
     sent_begin_position = int(0)
     annot_number = int()
+    
     for spacy_sent in doc_spacy.sents:
 
         #print(spacy_sent)
@@ -64,20 +67,18 @@ def build_annotation_file(doc, doc_filepath, model):
         #else:
            #del sentence 
     #print(l)
+    
     # Output the annotation file
     if ner_model=="medium":
-        annotation_filepath = '../evaluation/flair_subtask_2/medium/' + doc[:-3] + 'ann'
+        annotation_filepath = './evaluation/flair_subtask_2/medium/' + doc[:-3] + 'ann'
     elif ner_model=="base":
-        annotation_filepath = '../evaluation/flair_subtask_2/base/' + doc[:-3] + 'ann'
+        annotation_filepath = './evaluation/flair_subtask_2/base/' + doc[:-3] + 'ann'
     elif ner_model=="large":
-        annotation_filepath = '../evaluation/flair_subtask_2/large/' + doc[:-3] + 'ann'
-
+        annotation_filepath = './evaluation/flair_subtask_2/large/' + doc[:-3] + 'ann'
 
     #print(l)
     print(annotation_filepath)
     
-        
-
     with open(annotation_filepath, 'w', encoding='utf-8') as annotation_file:
         annotation_file.write(output)
         annotation_file.close()

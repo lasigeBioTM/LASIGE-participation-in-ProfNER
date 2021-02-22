@@ -1,8 +1,9 @@
 import os
+import sys
+sys.path.append("./")
 
-
-bio_dir = "../profner/subtask-2/BIO/"
-out_dir = "../profner/subtask-2/BIO-for-flair/"
+bio_dir = "./profner/subtask-2/BIO/"
+out_dir = "./profner/subtask-2/BIO-for-flair/"
 
 # delete characters that are not readable by python
 for doc in os.listdir(bio_dir):

@@ -28,5 +28,20 @@ Results for task 1 and 2 in "./submissions/submission_2/"
 ## 3. FLAIR tagger
 
 ### Embeddings
-- FastText Spanish COVID-19 CBOW uncased. Download [here](https://zenodo.org/record/4449930#.YC_gturLdak)
-- Spanish Flair embeddings. See [tutorial](https://github.com/flairNLP/flair/blob/master/resources/docs/embeddings/FLAIR_EMBEDDINGS.md)
+
+Run docker container (to use twitter embeddings) in server:
+
+``
+nvidia-docker run -v /../../mnt/data/profner/:/profner/ --name flair_ner_twitter --gpus device=1 -it f14eef18156e bash
+``
+
+Code is in dir "/../../mnt/data/profner/"
+
+Models:
+
+- "base": WordEmbeddings('es') + FlairEmbeddings('es-forward') + FlairEmbeddings('es-backward'). Spanish Flair embeddings. See [tutorial](https://github.com/flairNLP/flair/blob/master/resources/docs/embeddings/FLAIR_EMBEDDINGS.md)
+
+
+- "twitter": FastText Spanish COVID-19 CBOW uncased. Download [here](https://zenodo.org/record/4449930#.YC_gturLdak). [Load custom FastText Embeddings in FLAIR](https://github.com/flairNLP/flair/blob/master/resources/docs/embeddings/FASTTEXT_EMBEDDINGS.md)
+
+- "medium": combination of previous embeddings
