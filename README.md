@@ -16,8 +16,14 @@ Mentions belonging to "PROFESION" category:
 - synonyms of profner-gazetteer.tsv 
 - trainning set (4 versions)
 
+Output in "profesion_list.txt"
+
 Mentions belonging to "SITUACION_LABORAL" category
 - trainning set (4 versions)
+
+Output in "situacion_laboral_list.txt"
+
+Results for task 1 and 2 in "./submissions/submission_2/"
 
 ## 3. FLAIR tagger
 

@@ -1,0 +1,5 @@
+WARNING: Your kernel does not support swap limit capabilities or the cgroup is not mounted. Memory limited without swap.
+2021-02-22 17:30:47,686 root         INFO     -------------------------------------------
+2021-02-22 17:30:47,686 root         WARNING  Start scoring
+2021-02-22 17:30:47,706 root         WARNING  scores computed
+2021-02-22 17:30:47,706 root         WARNING  output file written

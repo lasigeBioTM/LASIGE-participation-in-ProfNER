@@ -1,0 +1,6 @@
+Task7bRelaxedF:0.529
+Task7bRelaxedP:0.418
+Task7bRelaxedR:0.721
+Task7bStrictF:0.386
+Task7bStrictP:0.290
+Task7bStrictR:0.578

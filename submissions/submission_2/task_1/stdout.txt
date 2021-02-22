@@ -1,0 +1,3 @@
+Start scoring
+scores computed
+output file written

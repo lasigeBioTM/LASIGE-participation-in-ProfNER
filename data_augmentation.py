@@ -1,7 +1,5 @@
 import nlpaug.augmenter.char as nac
 import nlpaug.augmenter.word as naw
-import nlpaug.augmenter.sentence as nas
-import nlpaug.flow as nafc
 import nltk
 import sys
 from nlpaug.util import Action
@@ -35,7 +33,6 @@ def augment_data(docs, subset):
 
         if doc != "":    
             tokens = doc.split("\n")
-            token_dict = dict()
             doc_id = str()
             doc_1 = str()
             doc_2 = str()
@@ -72,3 +69,7 @@ def augment_data(docs, subset):
             
         
 augment_data(load_dataset_BIO("train"), "train")
+
+
+
+
