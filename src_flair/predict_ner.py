@@ -14,78 +14,123 @@ sys.path.append("./")
 
 ner_model=str(sys.argv[1])
 
-def build_annotation_file(doc, doc_filepath, model):
+
+def write_header(model):
+    
+    # Output the annotation file
+    if ner_model=="medium":
+        annotation_filepath = '../evaluation/flair_subtask_2/medium/valid.tsv'  
+    elif ner_model=="base":
+        annotation_filepath = '../evaluation/flair_subtask_2/base/valid.tsv' 
+    elif ner_model=="large":
+        annotation_filepath = '../evaluation/flair_subtask_2/large/valid.tsv'
 
     output = str()
+    header = "tweet_id" + "\t" + "begin" + "\t" + "end" + "\t" + "type" + "\t" + "extraction" + "\n"
 
+    with open(annotation_filepath, 'w', encoding='utf-8') as annotation_file:
+        annotation_file.write(header)
+        #annotation_file.close()
+    
+
+def build_annotation_file(doc, doc_filepath, model,filenames):
+    
+
+    # Output the annotation file
+    if ner_model=="medium":
+        annotation_filepath = '../evaluation/flair_subtask_2/medium/valid.tsv'  
+    elif ner_model=="base":
+        annotation_filepath = '../evaluation/flair_subtask_2/base/valid.tsv' 
+    elif ner_model=="large":
+        annotation_filepath = '../evaluation/flair_subtask_2/large/valid.tsv'
+        
+    
+    output = str()
+    header = "tweet_id" + "\t" + "begin" + "\t" + "end" + "\t" + "type" + "\t" + "extraction" + "\n"
+
+
+    annotation_file = open(annotation_filepath, 'a', encoding='utf-8')
+    
+      
     with open(doc_filepath, 'r', encoding='utf-8') as doc_file:
         text = doc_file.read()
         doc_file.close()
     
     # Sentence segmentation followed by tokenization of each sentence
     doc_spacy = nlp(text)
-    #print(text)
-    #print(str(doc))
-    #print(doc_spacy)
     sent_begin_position = int(0)
     annot_number = int()
+    
     for spacy_sent in doc_spacy.sents:
+        
 
         #print(spacy_sent)
         if len(spacy_sent.text) >= 2 and spacy_sent.text[0] == "\n":
             sent_begin_position -= 1
-        #if len(spacy_sent.text) > 512:
-            #spacy_sent = spacy_sent[:512]
+
 
         sentence = Sentence(spacy_sent.text, use_tokenizer=True)
         model.predict(sentence)
-        #print(type(sentence))
             
         for entity in sentence.get_spans('ner'):
-            
-            if str(entity.tag).strip("\n") == "B-PROFESION":
-                 annot_number += 1
-                 begin_entity = str(sent_begin_position+entity.start_pos)
-                 end_entity = str(sent_begin_position+entity.end_pos)
-                 entity_text = "" 
-                 #output += "T" + str(annot_number) + "\t" + "PROFESION" + " " + begin_entity + " " + end_entity + "\t" + str(entity.text) + "\n"
-                 output += str(doc[:-3]) + "\t" + begin_entity + "\t" + end_entity + "\t" + "PROFESION" +  + str(entity.text) + "\n"
 
-            elif str(entity.tag).strip("\n") == "B-SITUACION_LABORAL":
+            
+            if str(entity.tag) == "PROFESION":
                  annot_number += 1
                  begin_entity = str(sent_begin_position+entity.start_pos)
                  end_entity = str(sent_begin_position+entity.end_pos)
                  entity_text = "" 
-                 #output += "T" + str(annot_number) + "\t" + "SITUACION LABORAL" + " " + begin_entity + " " + end_entity + "\t" + str(entity.text) + "\n"
-                 output += str(doc[:-3]) + "\t" + begin_entity + "\t" + end_entity + "\t" + "SITUACION LABORAL" +  + str(entity.text) + "\n"
+                 output += str(doc[:-4]) + "\t" + begin_entity + "\t" + end_entity + "\t" + "PROFESION" +  "\t" + str(entity.text) + "\n"
+                 filenames.append(doc[:-4])
+                 
+
+            elif str(entity.tag) == "SITUACION_LABORAL":
+                 annot_number += 1
+                 begin_entity = str(sent_begin_position+entity.start_pos)
+                 end_entity = str(sent_begin_position+entity.end_pos)
+                 entity_text = "" 
+                 output += str(doc[:-4]) + "\t" + begin_entity + "\t" + end_entity + "\t" + "SITUACION LABORAL" + "\t" + str(entity.text) + "\n"
+                 filenames.append(doc[:-4])
+                 
+
+            elif str(entity.tag) == "ACTIVIDAD":
+                 annot_number += 1
+                 begin_entity = str(sent_begin_position+entity.start_pos)
+                 end_entity = str(sent_begin_position+entity.end_pos)
+                 entity_text = "" 
+                 output += str(doc[:-4]) + "\t" + begin_entity + "\t" + end_entity + "\t" + "ACTIVIDAD" + "\t" + str(entity.text) + "\n"
+                 filenames.append(doc[:-4])
+                 
+
+            elif str(entity.tag) == 'FIGURATIVA' :
+                 annot_number += 1
+                 begin_entity = str(sent_begin_position+entity.start_pos)
+                 end_entity = str(sent_begin_position+entity.end_pos)
+                 entity_text = "" 
+                 output += str(doc[:-4]) + "\t" + begin_entity + "\t" + end_entity + "\t" + "FIGURATIVA" + "\t" + str(entity.text) + "\n"
+                 filenames.append(doc[:-4])
+                 
+                
+        
+            print(output)
 
 
         sent_begin_position += len(spacy_sent.text) + 1
-        #else:
-           #del sentence 
-    #print(l)
-    # Output the annotation file
-    if ner_model=="medium":
-        annotation_filepath = '../evaluation/flair_subtask_2/medium/' + doc[:-3] + 'ann'
-    elif ner_model=="base":
-        annotation_filepath = '../evaluation/flair_subtask_2/base/' + doc[:-3] + 'ann'
-    elif ner_model=="large":
-        annotation_filepath = '../evaluation/flair_subtask_2/large/' + doc[:-3] + 'ann'
 
-
-    #print(l)
-    print(annotation_filepath)
-    
         
-
-    with open(annotation_filepath, 'w', encoding='utf-8') as annotation_file:
+        
+    with open(annotation_filepath, 'a', encoding='utf-8') as annotation_file:
         annotation_file.write(output)
         annotation_file.close()
-        #print(l)
+
+    if str(doc[:-4]) not in filenames:
+        with open(annotation_filepath, 'a', encoding='utf-8') as annotation_file:
+            annotation_file.write(str(doc[:-4]) + "\t" + "-" + "\t" + "-" + "\t" + "-" + "\t" + "-" + "\n")
+            annotation_file.close()
+
+    
+    
             
-
-
-#print(l)
 if __name__ == "__main__":
     # load the model you trained
     if ner_model=="medium":
@@ -120,13 +165,15 @@ if __name__ == "__main__":
         os.makedirs("../evaluation/flair_subtask_2/large")
 
 
-
-
-    #corpus._test = [x for x in corpus.test if len(x) <= 384]
-
-    for doc in os.listdir(test_dir): #For each document in test_dir build the respective annotation file with predicted entities
+    write_header(model)
+    
+    filenames = []
+    
+    for doc in os.listdir(test_dir): #Build a file with the tweet_id and annotation of all the documents
         doc_filepath = test_dir + doc
-        build_annotation_file(doc, doc_filepath, model)
+        write_header(model)
+        build_annotation_file(doc, doc_filepath, model, filenames)
 
+    
                 
 print(build_annotation_file(doc, doc_filepath, model))
