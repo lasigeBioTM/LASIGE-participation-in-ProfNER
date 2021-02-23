@@ -59,7 +59,7 @@ To train a FLAIR tagger:
 
 ```
 
-python src/flair/train_ner_model_2.py <model>
+python src/flair/train_ner_model.py <model>
 
 ```
 
