@@ -75,7 +75,7 @@ To recognize entities in test set:
 
 ```
 
-python src/flair/predict_ner.py
+python src/flair/predict_ner.py <model>
 
 ```
 
