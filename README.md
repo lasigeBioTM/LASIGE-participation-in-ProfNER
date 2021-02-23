@@ -79,6 +79,28 @@ python src/flair/predict_ner.py <model>
 
 ```
 
+Arg <model>:
+- "base": [Spanish FLAIR embeddings](https://github.com/flairNLP/flair/blob/master/resources/docs/embeddings/FLAIR_EMBEDDINGS.md)
+- "twitter": FastText Spanish COVID-19 CBOW uncased. [Download](https://zenodo.org/record/4449930#.YC_gturLdak)
+- "medium": Combination of previous embeddings.
+
+Output TSV file in "/evaluation/flair_subtask_2/<model>"
+	
+### 3.4. Tweet classification
+To determine if a tweet in test set contains a mention of occupation:
+
+```
+python src/flair/flair_classification_tweet.py <model>
+
+```
+Arg <model>:
+- "base": [Spanish FLAIR embeddings](https://github.com/flairNLP/flair/blob/master/resources/docs/embeddings/FLAIR_EMBEDDINGS.md)
+- "twitter": FastText Spanish COVID-19 CBOW uncased. [Download](https://zenodo.org/record/4449930#.YC_gturLdak)
+- "medium": Combination of previous embeddings.
+
+Output TSV file in "/evaluation/flair_subtask_1/<model>"
+
+
 	
 
 
