@@ -19,11 +19,11 @@ def write_header(model):
     
     # Output the annotation file
     if ner_model=="medium":
-        annotation_filepath = '../evaluation/flair_subtask_2/medium/valid.tsv'  
+        annotation_filepath = './evaluation/flair_subtask_2/medium/valid.tsv'  
     elif ner_model=="base":
-        annotation_filepath = '../evaluation/flair_subtask_2/base/valid.tsv' 
+        annotation_filepath = './evaluation/flair_subtask_2/base/valid.tsv' 
     elif ner_model=="large":
-        annotation_filepath = '../evaluation/flair_subtask_2/large/valid.tsv'
+        annotation_filepath = './evaluation/flair_subtask_2/large/valid.tsv'
 
     output = str()
     header = "tweet_id" + "\t" + "begin" + "\t" + "end" + "\t" + "type" + "\t" + "extraction" + "\n"
@@ -38,11 +38,11 @@ def build_annotation_file(doc, doc_filepath, model,filenames):
 
     # Output the annotation file
     if ner_model=="medium":
-        annotation_filepath = '../evaluation/flair_subtask_2/medium/valid.tsv'  
+        annotation_filepath = './evaluation/flair_subtask_2/medium/valid.tsv'  
     elif ner_model=="base":
-        annotation_filepath = '../evaluation/flair_subtask_2/base/valid.tsv' 
+        annotation_filepath = './evaluation/flair_subtask_2/base/valid.tsv' 
     elif ner_model=="large":
-        annotation_filepath = '../evaluation/flair_subtask_2/large/valid.tsv'
+        annotation_filepath = './evaluation/flair_subtask_2/large/valid.tsv'
         
     
     output = str()
@@ -108,9 +108,7 @@ def build_annotation_file(doc, doc_filepath, model,filenames):
                  end_entity = str(sent_begin_position+entity.end_pos)
                  entity_text = "" 
                  output += str(doc[:-4]) + "\t" + begin_entity + "\t" + end_entity + "\t" + "FIGURATIVA" + "\t" + str(entity.text) + "\n"
-                 filenames.append(doc[:-4])
-                 
-                
+                 filenames.append(doc[:-4])        
         
             print(output)
 
@@ -128,42 +126,35 @@ def build_annotation_file(doc, doc_filepath, model,filenames):
             annotation_file.write(str(doc[:-4]) + "\t" + "-" + "\t" + "-" + "\t" + "-" + "\t" + "-" + "\n")
             annotation_file.close()
 
-    
-    
             
 if __name__ == "__main__":
     # load the model you trained
     if ner_model=="medium":
-        model = SequenceTagger.load('../resources/taggers/medium/final-model.pt')
+        model = SequenceTagger.load('./resources/taggers/medium/final-model.pt')
     elif ner_model=="base":
-        model = SequenceTagger.load('../resources/taggers/base/final-model.pt')
+        model = SequenceTagger.load('./resources/taggers/base/final-model.pt')
     elif ner_model=="large":
-        model = SequenceTagger.load('../resources/taggers/large/final-model.pt')
+        model = SequenceTagger.load('./resources/taggers/large/final-model.pt')
 
+    elif ner_model=="twitter":
+        model = SequenceTagger.load('./resources/taggers/twitter/final-model.pt')
 
-
-
-
-
-    
     ## Create spanish sentence segmenter with Spacy
     # the sentence segmentation by spacy is non-destructive, i.e., the empty lines are considered when getting a span of a given word/entity
     nlp = Spanish()
     sentencizer = nlp.create_pipe("sentencizer")
     nlp.add_pipe(sentencizer)
     
-    test_dir = "../profner/txt-files/valid/"
-    
-    
-    if not os.path.exists("../evaluation/flair_subtask_2/"):
-        os.makedirs("../evaluation/flair_subtask_2/")
-    if not os.path.exists("../evaluation/flair_subtask_2/medium"):
-        os.makedirs("../evaluation/flair_subtask_2/medium")
-    if not os.path.exists("../evaluation/flair_subtask_2/base"):
-        os.makedirs("../evaluation/flair_subtask_2/base")
-    if not os.path.exists("../evaluation/flair_subtask_2/large"):
-        os.makedirs("../evaluation/flair_subtask_2/large")
-
+    test_dir = "./profner/txt-files/valid/"
+     
+    if not os.path.exists("./evaluation/flair_subtask_2/"):
+        os.makedirs("./evaluation/flair_subtask_2/")
+    if not os.path.exists("./evaluation/flair_subtask_2/medium"):
+        os.makedirs("./evaluation/flair_subtask_2/medium")
+    if not os.path.exists("./evaluation/flair_subtask_2/base"):
+        os.makedirs("./evaluation/flair_subtask_2/base")
+    if not os.path.exists("./evaluation/flair_subtask_2/large"):
+        os.makedirs("./evaluation/flair_subtask_2/large")
 
     write_header(model)
     
@@ -173,7 +164,5 @@ if __name__ == "__main__":
         doc_filepath = test_dir + doc
         write_header(model)
         build_annotation_file(doc, doc_filepath, model, filenames)
-
-    
                 
 print(build_annotation_file(doc, doc_filepath, model))

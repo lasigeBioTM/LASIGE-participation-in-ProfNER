@@ -3,6 +3,7 @@ import nlpaug.augmenter.word as naw
 import nltk
 import sys
 from nlpaug.util import Action
+sys.path.insert(0,'./src/')
 from utils import load_dataset_BIO
 #nltk.download('omw')
 sys.path.append("./")

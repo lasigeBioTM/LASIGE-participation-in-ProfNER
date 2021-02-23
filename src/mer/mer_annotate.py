@@ -3,7 +3,9 @@ import merpy
 import nlpaug.augmenter.word as naw
 import os
 import sys
+sys.path.insert(0,'./src/')
 from utils import load_dataset_BIO
+
 sys.path.append("./")
 
 
@@ -63,7 +65,7 @@ def process_dicts_4_mer(category):
         profesions = find_entities_of_interest(all_docs, "PROFESION")
         professions_train_count =  len(profesions)
         print("Professions (PROFESSION) retrieved from train files!")
-
+        """
         #2. retrieves entities in gazeteer
         filepath = "occupations-gazetteer/profner-gazetteer.tsv"
 
@@ -82,9 +84,9 @@ def process_dicts_4_mer(category):
 
                     if synonym_1 != row[1]:
                         profesions.append(synonym_1)
-
+        
         print("Professions (PROFESSION) retrieved from the gazetter!")
-
+        """
     elif category == "SITUACION_LABORAL":
         #3. retrieves working status in train set
         situacion_laboral = find_entities_of_interest(all_docs, "SITUACION_LABORAL")
@@ -95,7 +97,6 @@ def process_dicts_4_mer(category):
 
     if category == "PROFESION":
         profesion_unique = list()
-        print("LEN PROFESSIONS: ", len(profesions))
 
         for profesion in profesions:
             
@@ -103,8 +104,6 @@ def process_dicts_4_mer(category):
                 output += profesion + "\n"
                 profesion_unique.append(profesion)
                 
-        print("LEN PROFESSIONS UNIQUE: ", len(profesion_unique))
-
     elif category == "SITUACION_LABORAL":
         situacion_unique = list()
 
@@ -118,11 +117,11 @@ def process_dicts_4_mer(category):
         out_file.write(output)
         out_file.close()
 
-#process_dicts_4_mer("PROFESION")
+process_dicts_4_mer("PROFESION")
 
 def create_lexicons():
 
-    #process_dicts_4_mer("PROFESION")
+    process_dicts_4_mer("PROFESION")
     #process_dicts_4_mer("SITUACION_LABORAL")
 
     professions = list()
@@ -130,15 +129,17 @@ def create_lexicons():
     with open("profesion_list.txt", "r") as professions_file:
         data = professions_file.read()
         professions = [entity for entity in data.split("\n")]
+        professions_file.close()
     
     with open("situacion_laboral_list.txt", "r") as situacion_file:
         data = situacion_file.read()
         situacion_laboral = [entity for entity in data.split("\n")]
+        situacion_file.close()
     
-    #merpy.create_lexicon(professions, "profesion")
-    merpy.create_lexicon(situacion_laboral, "situacion")
-    merpy.process_lexicon("profesion")
-    merpy.process_lexicon("situacion")
+    merpy.create_lexicon(professions, "profesionShort")
+    #merpy.create_lexicon(situacion_laboral, "situacion")
+    merpy.process_lexicon("profesionShort")
+    #merpy.process_lexicon("situacion")
     
     #merpy.delete_lexicon("profesion")
     print(merpy.show_lexicons())
@@ -160,10 +161,8 @@ def generate_output_file():
             in_file.close()
 
         doc_id = test_file.strip(".txt")
-        if doc_id == "1247094610637328384":
-            print("1247094610637328384")
         
-        professions = merpy.get_entities(text, "profesion")
+        professions = merpy.get_entities(text, "profesionShort")
         working_status = merpy.get_entities(text, "situacion")
         
         if professions[0] != ['']: 

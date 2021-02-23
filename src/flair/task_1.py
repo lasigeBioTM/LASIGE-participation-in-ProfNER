@@ -4,21 +4,21 @@ import sys
 ner_model = str(sys.argv[1])
 
 
-if not os.path.exists("../evaluation/flair_subtask_1/"):
-    os.makedirs("../evaluation/flair_subtask_1/")
-if not os.path.exists("../evaluation/flair_subtask_1/medium"):
-    os.makedirs("../evaluation/flair_subtask_1/medium")
-if not os.path.exists("../evaluation/flair_subtask_1/base"):
-    os.makedirs("../evaluation/flair_subtask_1/base")
-if not os.path.exists("../evaluation/flair_subtask_1/large"):
-    os.makedirs("../evaluation/flair_subtask_1/large")
+if not os.path.exists("./evaluation/flair_subtask_1/"):
+    os.makedirs("./evaluation/flair_subtask_1/")
+if not os.path.exists("./evaluation/flair_subtask_1/medium"):
+    os.makedirs("./evaluation/flair_subtask_1/medium")
+if not os.path.exists("./evaluation/flair_subtask_1/base"):
+    os.makedirs("./evaluation/flair_subtask_1/base")
+if not os.path.exists("./evaluation/flair_subtask_1/large"):
+    os.makedirs("./evaluation/flair_subtask_1/large")
 
 
 
 
-task2File = '../evaluation/flair_subtask_2/' + ner_model + '/valid.tsv'
+task2File = './evaluation/flair_subtask_2/' + ner_model + '/valid.tsv'
 
-out = '../evaluation/flair_subtask_1/' + ner_model + '/valid.tsv'
+out = './evaluation/flair_subtask_1/' + ner_model + '/valid.tsv'
 
 header = "tweet_id" + "\t" + "label" + "\n"
 
