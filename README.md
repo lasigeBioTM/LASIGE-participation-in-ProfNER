@@ -8,11 +8,11 @@
 
 To perform data augmentation in train set (train_spacy.txt):
 
-``
+```
 
 python src/mer/data_augmentation.py
 
-``
+```
 
 Output: train_spacy.txt + train_key.txt + train_random.txt + train_synonym.txt in dir "profner/subtask-2/BIO/
 
@@ -32,11 +32,11 @@ Output: train_spacy.txt + train_key.txt + train_random.txt + train_synonym.txt i
 
 To recognize entities in test set:
 
-``
+```
 
 python src/mer/mer_annotate.py
 
-``
+```
 
 Output: "valid_task1.txt" and "valid_task2_txt"
 
@@ -47,21 +47,21 @@ Output: "valid_task1.txt" and "valid_task2_txt"
 
 To prepare train files for FLAIR:
 
-``
+```
 
 python src/flair/flair_pre_process.py 
 
-``
+```
 
 ### 3.2. Training
 
 To train a FLAIR tagger:
 
-``
+```
 
 python src/flair/train_ner_model_2.py <model>
 
-``
+```
 
 Arg <model>:
 - "base": [Spanish FLAIR embeddings](https://github.com/flairNLP/flair/blob/master/resources/docs/embeddings/FLAIR_EMBEDDINGS.md)
@@ -73,11 +73,11 @@ Output in "resources/taggers/<model>"
 ### 3.3. Named Entity Recognition
 To recognize entities in test set:
 
-``
+```
 
 python src/flair/predict_ner.py
 
-``
+```
 
 	
 
