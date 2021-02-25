@@ -5,7 +5,7 @@ from flair.datasets import ColumnCorpus
 from flair.embeddings import FlairEmbeddings, StackedEmbeddings, WordEmbeddings, FastTextEmbeddings
 from flair.models import SequenceTagger
 from flair.trainers import ModelTrainer
-#from pre_process_NER import cantemist_to_IOB2
+
 
 sys.path.append("./")
 
@@ -37,7 +37,7 @@ tag_dictionary = corpus.make_tag_dictionary(tag_type=tag_type)
 print(tag_dictionary)
 
 # 4. initialize trained embeddings
-ner_model = str(sys.argv[1]) #base, medium
+ner_model = str(sys.argv[1]) #base, medium,twitter
 embedding_types = list()
 
 
@@ -54,7 +54,7 @@ elif ner_model == "medium":
                     FlairEmbeddings('es-forward'), 
                     FlairEmbeddings('es-backward'),
                     FastTextEmbeddings("./uncased/covid_19_es_twitter_cbow_uncased.bin")]
-                # or FlairEmbeddings('../embeddings/twitter/pytorch_model.bin')
+                
 
 
 # List of available embeddings in FLAIR: https://github.com/flairNLP/flair/tree/master/resources/docs/embeddings

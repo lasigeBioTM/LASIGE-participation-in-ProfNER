@@ -22,15 +22,15 @@ def write_header(model):
         annotation_filepath = './evaluation/flair_subtask_2/medium/valid.tsv'  
     elif ner_model=="base":
         annotation_filepath = './evaluation/flair_subtask_2/base/valid.tsv' 
-    elif ner_model=="large":
-        annotation_filepath = './evaluation/flair_subtask_2/large/valid.tsv'
+    elif ner_model=="twitter":
+        annotation_filepath = './evaluation/flair_subtask_2/twitter/valid.tsv'
 
     output = str()
     header = "tweet_id" + "\t" + "begin" + "\t" + "end" + "\t" + "type" + "\t" + "extraction" + "\n"
 
     with open(annotation_filepath, 'w', encoding='utf-8') as annotation_file:
         annotation_file.write(header)
-        #annotation_file.close()
+        annotation_file.close()
     
 
 def build_annotation_file(doc, doc_filepath, model,filenames):
@@ -41,8 +41,8 @@ def build_annotation_file(doc, doc_filepath, model,filenames):
         annotation_filepath = './evaluation/flair_subtask_2/medium/valid.tsv'  
     elif ner_model=="base":
         annotation_filepath = './evaluation/flair_subtask_2/base/valid.tsv' 
-    elif ner_model=="large":
-        annotation_filepath = './evaluation/flair_subtask_2/large/valid.tsv'
+    elif ner_model=="twitter":
+        annotation_filepath = './evaluation/flair_subtask_2/twitter/valid.tsv'
         
     
     output = str()
@@ -64,7 +64,7 @@ def build_annotation_file(doc, doc_filepath, model,filenames):
     for spacy_sent in doc_spacy.sents:
         
 
-        #print(spacy_sent)
+        
         if len(spacy_sent.text) >= 2 and spacy_sent.text[0] == "\n":
             sent_begin_position -= 1
 
@@ -110,14 +110,13 @@ def build_annotation_file(doc, doc_filepath, model,filenames):
                  output += str(doc[:-4]) + "\t" + begin_entity + "\t" + end_entity + "\t" + "FIGURATIVA" + "\t" + str(entity.text) + "\n"
                  filenames.append(doc[:-4])        
         
-            print(output)
+            
 
 
         sent_begin_position += len(spacy_sent.text) + 1
 
-        
-        
     with open(annotation_filepath, 'a', encoding='utf-8') as annotation_file:
+        print(output)
         annotation_file.write(output)
         annotation_file.close()
 
@@ -125,6 +124,7 @@ def build_annotation_file(doc, doc_filepath, model,filenames):
         with open(annotation_filepath, 'a', encoding='utf-8') as annotation_file:
             annotation_file.write(str(doc[:-4]) + "\t" + "-" + "\t" + "-" + "\t" + "-" + "\t" + "-" + "\n")
             annotation_file.close()
+    
 
             
 if __name__ == "__main__":
@@ -133,9 +133,6 @@ if __name__ == "__main__":
         model = SequenceTagger.load('./resources/taggers/medium/final-model.pt')
     elif ner_model=="base":
         model = SequenceTagger.load('./resources/taggers/base/final-model.pt')
-    elif ner_model=="large":
-        model = SequenceTagger.load('./resources/taggers/large/final-model.pt')
-
     elif ner_model=="twitter":
         model = SequenceTagger.load('./resources/taggers/twitter/final-model.pt')
 
@@ -153,8 +150,8 @@ if __name__ == "__main__":
         os.makedirs("./evaluation/flair_subtask_2/medium")
     if not os.path.exists("./evaluation/flair_subtask_2/base"):
         os.makedirs("./evaluation/flair_subtask_2/base")
-    if not os.path.exists("./evaluation/flair_subtask_2/large"):
-        os.makedirs("./evaluation/flair_subtask_2/large")
+    if not os.path.exists("./evaluation/flair_subtask_2/twitter"):
+        os.makedirs("./evaluation/flair_subtask_2/twitter")
 
     write_header(model)
     
@@ -162,7 +159,6 @@ if __name__ == "__main__":
     
     for doc in os.listdir(test_dir): #Build a file with the tweet_id and annotation of all the documents
         doc_filepath = test_dir + doc
-        write_header(model)
         build_annotation_file(doc, doc_filepath, model, filenames)
-                
-print(build_annotation_file(doc, doc_filepath, model))
+
+    
