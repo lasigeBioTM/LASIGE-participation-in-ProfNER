@@ -1,0 +1,12 @@
+WARNING: Your kernel does not support swap limit capabilities or the cgroup is not mounted. Memory limited without swap.
+2021-02-27 12:47:58,538 root         INFO     -------------------------------------------
+2021-02-27 12:47:58,538 root         INFO     Pred file:/tmp/codalab/tmpn4Q2Lk/run/input/res/valid.tsv, Gold file:/tmp/codalab/tmpn4Q2Lk/run/input/ref/valid.tsv
+2021-02-27 12:47:58,538 root         INFO     Tweet dir:/tmp/codalab/tmpn4Q2Lk/run/input/ref/txt_files/, Output file:/tmp/codalab/tmpn4Q2Lk/run/output/scores.txt
+2021-02-27 12:47:58,538 root         INFO     Start scoring
+2021-02-27 12:47:58,548 root         INFO     Loaded dataset 2000 tweets. 651 annotations.
+2021-02-27 12:47:58,555 root         INFO     Loaded dataset 2000 tweets. 533 annotations.
+2021-02-27 12:47:58,558 root         INFO     TP:481 FP:53 FN:171
+2021-02-27 12:47:58,558 root         INFO     Precision:0.901 Recall:0.738 F1:0.811
+2021-02-27 12:47:58,560 root         INFO     TP:424 FP:109 FN:227
+2021-02-27 12:47:58,561 root         INFO     Precision:0.795 Recall:0.651 F1:0.716
+2021-02-27 12:47:58,562 root         INFO     Finished scoring

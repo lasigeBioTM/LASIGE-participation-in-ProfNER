@@ -1,0 +1,8 @@
+Model,Relaxed Precision ,Relaxed Recall,Relaxed F1-Score,Strict Precision,Strict Recall,Strict F1-score
+Base (4 files),0.826,0.721,0.77,0.705,0.616,0.657
+Medium (4 files),0.753,0.733,0.743,0.618,0.601,0.609
+Twitter (1 file),0.856,0.73,0.788,0.721,0.616,0.664
+Base (1 file),0.901,0.738,0.811,0.795,0.651,0.716
+Twiter (4 files),0.737,0.755,0.746,0.597,0.611,0.604
+MER 2,0.668,0.667,0.667,0.472,0.535,0.501
+MER 1,0.565,0.668,0.612,0.399,0.535,0.457
