@@ -54,101 +54,107 @@ def find_entities_of_interest(docs, category):
 
 def process_dicts_4_mer(category):
 
-    
     train_docs = load_dataset_BIO("train")
     all_docs = train_docs
-    #all_docs = train_docs + dev_docs
+    #dev_docs = load_dataset_BIO("dev") #uncomment only in Evaluation phase, to make predictions on test set
+    #all_docs = train_docs + dev_docs 
     synonym_word = naw.SynonymAug(aug_src='wordnet', lang='spa')
+    entities = list()
 
-    if category == "PROFESION":
-        # 1. Retrieve professions in the several files of train set
-        profesions = find_entities_of_interest(all_docs, "PROFESION")
-        professions_train_count =  len(profesions)
+    if category == "PROFESION" or category == "PROFESION_short": # 1. Retrieve mentions in the several files of train set
+        entities = find_entities_of_interest(all_docs, "PROFESION")
         print("Professions (PROFESSION) retrieved from train files!")
-        """
-        #2. retrieves entities in gazeteer
-        filepath = "occupations-gazetteer/profner-gazetteer.tsv"
+    
+        if category == "PROFESION_short": #2. retrieves entities in gazeteer
+            filepath = "occupations-gazetteer/profner-gazetteer.tsv"
 
-        with open(filepath) as gazetter_file:
-            reader = csv.reader(gazetter_file, delimiter="\t")
-            row_count = int()
-            
-            for row in reader:
-                row_count += 1
+            with open(filepath) as gazetter_file:
+                reader = csv.reader(gazetter_file, delimiter="\t")
+                row_count = int()
                 
-                if row_count > 2:
-                    profesions.append(row[0])
-                    profesions.append(row[1])
-                
-                    synonym_1 = synonym_word.augment(row[1])
+                for row in reader:
+                    row_count += 1
+                    
+                    if row_count > 2:
+                        entities.append(row[0])
+                        entities.append(row[1])
+                    
+                        synonym_1 = synonym_word.augment(row[1])
 
-                    if synonym_1 != row[1]:
-                        profesions.append(synonym_1)
+                        if synonym_1 != row[1]:
+                            entities.append(synonym_1)
         
         print("Professions (PROFESSION) retrieved from the gazetter!")
-        """
-    elif category == "SITUACION_LABORAL":
-        #3. retrieves working status in train set
-        situacion_laboral = find_entities_of_interest(all_docs, "SITUACION_LABORAL")
-        print("Working status (SITUACION_LABORAL) retrieved from train files")
         
+    elif category == "SITUACION_LABORAL" or category == "ACTIVIDAD" or category == "FIGURATIVA":
+        #3. retrieves mentions from train set
+        entities = find_entities_of_interest(all_docs, category)
+        print(category + " mentions retrieved from train files")
+    
     output_filepath = category.lower() + "_list.txt"
     output = str()
 
-    if category == "PROFESION":
-        profesion_unique = list()
+    for entity in entities:
 
-        for profesion in profesions:
-            
-            if profesion not in profesion_unique:
-                output += profesion + "\n"
-                profesion_unique.append(profesion)
-                
-    elif category == "SITUACION_LABORAL":
-        situacion_unique = list()
-
-        for situacion in situacion_laboral:
-
-            if situacion not in situacion_unique:
-                output += situacion + "\n"
-                situacion_unique.append(situacion)
+        if entity not in entities_unique:
+            output += entity + "\n"
+            entities_unique.append(entity)
 
     with open(output_filepath, "w") as out_file:  
         out_file.write(output)
         out_file.close()
 
-process_dicts_4_mer("PROFESION")
 
 def create_lexicons():
 
-    process_dicts_4_mer("PROFESION")
-    #process_dicts_4_mer("SITUACION_LABORAL")
-
-    professions = list()
+    categories = ["PROFESION", "PROFESION_short" "SITUACION_LABORAL", "ACTIVIDAD", "FIGURATIVA"]
+    
+    for category in categories:
+        process_dicts_4_mer(category)
 
     with open("profesion_list.txt", "r") as professions_file:
         data = professions_file.read()
         professions = [entity for entity in data.split("\n")]
         professions_file.close()
     
+    with open("profesion_short_list.txt", "r") as professions_short_file:
+        data = professions_short_file.read()
+        professions_short = [entity for entity in data.split("\n")]
+        professions_short_file.close()
+    
     with open("situacion_laboral_list.txt", "r") as situacion_file:
         data = situacion_file.read()
         situacion_laboral = [entity for entity in data.split("\n")]
         situacion_file.close()
+
+    with open("actividad_list.txt", "r") as actividad_file:
+        data = actividad_file.read()
+        actividad = [entity for entity in data.split("\n")]
+        actividad_file.close()
+
+    with open("figurativa_list.txt", "r") as figurativa_file:
+        data = figurativa_file.read()
+        figurativa = [entity for entity in data.split("\n")]
+        figurativa_file.close()
     
-    merpy.create_lexicon(professions, "profesionShort")
-    #merpy.create_lexicon(situacion_laboral, "situacion")
+    merpy.create_lexicon(professions, "profesion")
+    merpy.create_lexicon(professions_short, "profesionShort")
+    merpy.create_lexicon(situacion_laboral, "situacion")
+    merpy.create_lexicon(actividad, "actividad")
+    merpy.create_lexicon(figurativa, "figurativa")
+    
+    merpy.process_lexicon("profesion")
     merpy.process_lexicon("profesionShort")
-    #merpy.process_lexicon("situacion")
-    
-    #merpy.delete_lexicon("profesion")
+    merpy.process_lexicon("situacion")
+    merpy.process_lexicon("actividad")
+    merpy.process_lexicon("figurativa")
+   
     print(merpy.show_lexicons())
 
-#create_lexicons()
 
 def generate_output_file():
 
-    test_dir = "profner/txt-files/valid/"
+    test_dir = "profner/txt-files/valid/" #Change in Evaluation phase to "profner/txt-files/test/"
     docs_with_entities = list()
     output_entities = list()
     test_count = int()
@@ -164,6 +170,8 @@ def generate_output_file():
         
         professions = merpy.get_entities(text, "profesionShort")
         working_status = merpy.get_entities(text, "situacion")
+        actividad = merpy.get_entities(text, "actividad")
+        figurativa = merpy.get_entities(text, "figurativa")
         
         if professions[0] != ['']: 
 
@@ -180,9 +188,28 @@ def generate_output_file():
                 docs_with_entities.append((doc_id, "1"))
 
             for work in working_status:
-                output_entities.append((doc_id, work[0], work[1], "SITUACION_LABORAL", work[2]))
                 
-        if working_status[0] == [''] and professions[0] == ['']: 
+                if work[2].lower() != "sin":
+                    print(work)
+                    output_entities.append((doc_id, work[0], work[1], "SITUACION_LABORAL", work[2]))
+        
+        if actividad[0] != ['']:
+            
+            if (doc_id, "1") not in docs_with_entities: 
+                docs_with_entities.append((doc_id, "1"))
+
+            for act in actividad:
+                output_entities.append((doc_id, act[0], act[1], "ACTIVIDAD", act[2]))
+                
+        if figurativa[0] != ['']:
+            
+            if (doc_id, "1") not in docs_with_entities: 
+                docs_with_entities.append((doc_id, "1"))
+
+            for fig in figurativa:
+                output_entities.append((doc_id, fig[0], fig[1], "FIGURATIVA", fig[2]))
+        
+        if working_status[0] == [''] and professions[0] == [''] and actividad[0] == [''] and figurativa[0] == [''] : 
             output_entities.append((doc_id, "-", "-", "-", "-"))
             docs_with_entities.append((doc_id, "0"))
 
@@ -209,5 +236,12 @@ def generate_output_file():
             tsv_writer.writerow(entity)
 
 
-generate_output_file()
+if __name__ == "__main__": 
+    lexicons = sys.argv[1]
+
+    if lexicons: #In the first run it is necessary to create and process the lexicons for MER
+        create_lexicons()
+
+    else:
+        generate_output_file()
 

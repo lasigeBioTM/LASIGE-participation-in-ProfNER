@@ -1,3 +1,0 @@
-Time series instead of SIR models. The @SantiGarciaCC method to predict the evolution of #COVID19.
-Via @elconfidencial 
-https://t.co/YJe9RrSaXo

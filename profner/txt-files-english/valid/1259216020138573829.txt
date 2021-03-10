@@ -1,6 +1,0 @@
-I will explain how the phases will be:
-Phase 0
-2. Offset 1
-3. Phase 2
-4. Offset 3
-5. Confinement.

@@ -1,1 +1,0 @@
-Do you want an example of spatial autocorrelation? Well, here you have one... 😀 There is a "contagion" effect between neighboring provinces and a very marked spatial pattern.

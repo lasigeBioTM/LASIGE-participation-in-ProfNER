@@ -1,1 +1,0 @@
-Occupations from DeCS, ESCO, SnomedCT and WordNet. In addition, we include a set of occupations detected by Stanford CoreNLP in a group of social media profiles. For every term, we include its lemma. The lemma was extracted using the PlanTL Med_Tagger: https://github.com/PlanTL-SANIDAD/SPACCC_POS-TAGGER

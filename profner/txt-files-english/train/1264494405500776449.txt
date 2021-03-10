@@ -1,1 +1,0 @@
-Now we can clearly see in the graph the habit of "releasing" one day a large number of infected that were "hidden". This has already happened twice, it is a periodic phenomenon. However, if we look at the trends of the epidemic in the previous days

@@ -1,6 +1,0 @@
-[THREAD]
-Yesterday we made public an online resource to compare the measures taken by European countries vs.
-
-Its core is an active table linking measurements to dates, gazette publications and deaths.
-
-Some questions are answered below: https://t.co/6qmpNIzzwm
