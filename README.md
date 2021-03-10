@@ -29,7 +29,7 @@ To install the necessary requirements execute the following script:
 
 ```
 
-./instal_requirements.sh
+pip install -r requirements.txt
 
 ```
 
