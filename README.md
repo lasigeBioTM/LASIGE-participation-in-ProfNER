@@ -36,7 +36,7 @@ pip install -r requirements.txt
 
 ## 2. Preprocessing
 
-To perform **data augmentation** in the train set (train_spacy.txt):
+To perform **data augmentation** in the train set (train_spacy.txt) using [nlpaug](https://github.com/makcedward/nlpaug) library
 
 ```
 
@@ -92,6 +92,8 @@ Output: "valid_task1.txt" and "valid_task2_txt" with predictions for sub-track 7
 -------------------------------------------------------------------------------------------------------------------
 
 ## 4. FLAIR tagger
+
+[FLAIR](https://github.com/flairNLP/flair) framework
 
 ### 4.1. Preprocessing
 
