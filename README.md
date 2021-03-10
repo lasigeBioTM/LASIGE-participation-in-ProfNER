@@ -1,8 +1,5 @@
 # LASIGE-participation-in-ProfNER
 
-[Schema with the pipeline](https://docs.google.com/presentation/d/1uQNmCLS-81W1j-xsnzrp4NjSLi2iVUu3JFMFtdpmCVU/edit?usp=sharing)
-
-
 The track [ProfNER-ST: Identification of professions \& occupations in Health-related Social Media"](https://temu.bsc.es/smm4h-spanish/) in the context of the [\#SMM4H 2021](https://healthlanguageprocessing.org/smm4h-shared-task-2021/) included two different sub-tracks:
 
 - Track A: Tweet binary classification
@@ -10,7 +7,9 @@ The track [ProfNER-ST: Identification of professions \& occupations in Health-re
 
 This repository contains the code associated with the participation of the Lasige-BioTM team in both sub-tracks of ProfNER.
 
----------------------------------------------------------------------
+[Draft Schema with the pipeline](https://docs.google.com/presentation/d/1uQNmCLS-81W1j-xsnzrp4NjSLi2iVUu3JFMFtdpmCVU/edit?usp=sharing)
+
+-------------------------------------------------------------------------------------------------------------------
 ## 1. Setup
 
 ### 1.1. Data
@@ -33,6 +32,7 @@ pip install -r requirements.txt
 
 ```
 
+-------------------------------------------------------------------------------------------------------------------
 
 ## 2. Preprocessing
 
@@ -46,12 +46,15 @@ python src/mer/data_augmentation.py
 
 Output: train_spacy.txt + train_key.txt + train_random.txt + train_synonym.txt in dir "profner/subtask-2/BIO/
 
+-------------------------------------------------------------------------------------------------------------------
 
 ## 3. MER
 
 [Python implementation of MER](https://pypi.org/project/merpy/)
 
-### 2.1. To create and process lexicons for MER
+### 3.1. To create and process lexicons for MER
+
+The following lexicons are created and processed for MER: 
 
 - 1st lexicon "profesionShort": it includes mentions belonging to "PROFESION" category in train files + synonyms (output in "profesion_list.txt")
 
@@ -63,22 +66,34 @@ Output: train_spacy.txt + train_key.txt + train_random.txt + train_synonym.txt i
 
 - 5th lexicon "figurativa": mentions belonging to "FIGURATIVA" category in train files (output in "figurativa_list.txt")
 
-### 2.2. Named Entity Recognition
-
-To recognize entities in dev set and generate predictions file
+Run the script:
 
 ```
 
-python src/mer/mer_annotate.py
+python src/mer/mer_annotate.py <mode>
+
+```
+
+Arg:
+- <mode>: if it is the first run, has value "lexicon", otherwise has value "predict"
+- 
+### 3.2. Tweet classification and Named Entity Recognition
+
+To recognize entities in test set, classify tweets, and generate predictions file for both sub-tracks run the same script with a different value for the first argument:
+
+```
+
+python src/mer/mer_annotate.py predict
 
 ```
 
 Output: "valid_task1.txt" and "valid_task2_txt" with predictions for sub-track 7a and 7b, respectively.
 
+-------------------------------------------------------------------------------------------------------------------
 
-## 3. FLAIR tagger
+## 4. FLAIR tagger
 
-### 3.1. Preprocessing
+### 4.1. Preprocessing
 
 To prepare train files for FLAIR:
 
@@ -88,7 +103,7 @@ python src/flair/flair_pre_process.py
 
 ```
 
-### 3.2. Training
+### 4.2. Training
 
 To train the NER tagger:
 
@@ -105,7 +120,7 @@ Arg <model>:
 
 Output in "resources/taggers/<model>"
 
-### 3.3. Prediction
+### 4.3. Prediction
 To recognize entities in test set and generate the output file:
 
 ```
