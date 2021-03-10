@@ -7,7 +7,7 @@ The track [ProfNER-ST: Identification of professions \& occupations in Health-re
 
 This repository contains the code associated with the participation of the Lasige-BioTM team in both sub-tracks of ProfNER.
 
-[Draft Schema with the pipeline](https://docs.google.com/presentation/d/1uQNmCLS-81W1j-xsnzrp4NjSLi2iVUu3JFMFtdpmCVU/edit?usp=sharing)
+[Draft schema with the pipeline](https://docs.google.com/presentation/d/1uQNmCLS-81W1j-xsnzrp4NjSLi2iVUu3JFMFtdpmCVU/edit?usp=sharing)
 
 -------------------------------------------------------------------------------------------------------------------
 ## 1. Setup
@@ -40,7 +40,7 @@ To perform **data augmentation** in the train set (train_spacy.txt) using [nlpau
 
 ```
 
-python src/mer/data_augmentation.py
+python src/data_augmentation.py
 
 ```
 
@@ -76,7 +76,7 @@ python src/mer/mer_annotate.py <mode>
 
 Arg:
 - <mode>: if it is the first run, has value "lexicon", otherwise has value "predict"
-- 
+
 ### 3.2. Tweet classification and Named Entity Recognition
 
 To recognize entities in test set, classify tweets, and generate predictions file for both sub-tracks run the same script with a different value for the first argument:
